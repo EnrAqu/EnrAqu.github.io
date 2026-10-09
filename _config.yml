@@ -213,6 +213,7 @@ exclude:
   - "*.config.js"
   - "package*.json"
   - Z-Command.MD
+  - CLAUDE.md
 
 jekyll-archives:
   enabled: [categories, tags]

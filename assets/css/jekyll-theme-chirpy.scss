@@ -1,0 +1,18 @@
+---
+---
+
+/* prettier-ignore */
+@use 'main
+{%- if jekyll.environment == 'production' -%}
+  .bundle
+{%- endif -%}
+';
+
+/* append your custom style below */
+
+/* The sidebar is a full-height flex column: on short viewports the profile
+   header gets shrunk and the tagline overlaps the nav. Keep it full size
+   and let the sidebar scroll instead. */
+#sidebar .profile-wrapper {
+  flex-shrink: 0;
+}
