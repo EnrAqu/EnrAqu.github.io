@@ -55,7 +55,8 @@ mermaid: true   # solo se il post ha diagrammi
 - `lang: it-IT`, `timezone: Europe/Rome`. Tagline e description sono in italiano in `_config.yml`.
 - **Override del tema** (se aggiorni Chirpy, controlla che siano ancora allineati):
   - `_includes/footer.html`: copia del footer originale, senza la riga "Servizio offerto da Jekyll con tema Chirpy";
-  - `assets/css/jekyll-theme-chirpy.scss`: stili custom. Contiene `#sidebar .profile-wrapper { flex-shrink: 0; }` per evitare che la tagline si sovrapponga al menu.
+  - `assets/css/jekyll-theme-chirpy.scss`: stili custom. Contiene `#sidebar .profile-wrapper { flex-shrink: 0; }` e `#sidebar .site-subtitle { height: auto; }`. Senza queste regole la tagline lunga si sovrappone al menu: le versioni recenti di Chirpy danno alla tagline un'altezza fissa di `3rem`.
+- **Attenzione alle versioni:** `Gemfile.lock` è in `.gitignore`, quindi la CI installa l'ultima Chirpy compatibile con `~> 7.4`, che può essere più recente di quella locale. Se qualcosa si vede bene in locale ma non online, confronta il CSS pubblicato (`/assets/css/jekyll-theme-chirpy.css`) con quello di `_site`, oppure lancia `bundle update` in locale.
 - Commenti: **Giscus** sulle Discussions della repo, categoria *Announcements*, mapping `pathname`, lingua `it`.
 - Tab: About (`_tabs/about.md`), Progetti (`_tabs/projects.md`, scritta a mano dai repo pubblici di GitHub), più quelle standard.
 - `Z-Command.MD` contiene appunti locali ed è escluso dalla build.

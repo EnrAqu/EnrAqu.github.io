@@ -16,3 +16,9 @@
 #sidebar .profile-wrapper {
   flex-shrink: 0;
 }
+
+/* Newer Chirpy versions give the tagline a fixed `height: 3rem`, which only
+   fits a short line: let it grow with the text. */
+#sidebar .site-subtitle {
+  height: auto;
+}

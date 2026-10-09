@@ -22,7 +22,7 @@ Scavando è venuto fuori che i guai erano due, uno dopo l'altro.
 ImagePullUnauthorizedFailure
 ```
 
-L'immagine esisteva, il tag pure. Semplicemente la app non aveva modo di autenticarsi sul registry: nessuna `DOCKER_REGISTRY_SERVER_*` tra le app settings. Le avevo messe a mano in passato, e il redeploy da Bicep le aveva spazzate via (perché nel Bicep non c'erano mai state).
+L'immagine esisteva, il tag pure. Semplicemente la app non aveva modo di autenticarsi sul registry: nessuna `DOCKER_REGISTRY_SERVER_*` tra le app settings. Le avevo messe a mano in passato, e il redeploy da Bicep le aveva spazzate via (perché nel Bicep non c'erano mai state). Sì, è proprio il problema di cui parlavo in [Il redeploy che ti cancella le app settings](/posts/redeploy-cancella-app-settings/): questa Function App, però, non era ancora passata al modulo con la `union`. Il calzolaio con le scarpe rotte, insomma. 👞
 
 Rimesse `DOCKER_REGISTRY_SERVER_URL`, `_USERNAME` e `_PASSWORD` (le credenziali admin dell'ACR, volevo l'autenticazione a password) e riavviata la app: il container finalmente parte. `Site started`, `WarmUpProbeSucceeded`, applausi.
 
