@@ -2,7 +2,8 @@
 title: "WEBSITES_ENABLE_APP_SERVICE_STORAGE: il booleano che ti nasconde le function"
 date: 2026-10-09 00:00:00 +0200
 categories: [Azure, Functions]
-tags: [azure-functions, acr, docker, app-service, containers, bicep]
+tags: [azure-functions, acr, docker, app-service, containers, bicep, azure-dal-campo]
+mermaid: true
 ---
 
 # WEBSITES_ENABLE_APP_SERVICE_STORAGE: il booleano che ti nasconde le function
@@ -40,6 +41,15 @@ Il colpevole è `WEBSITES_ENABLE_APP_SERVICE_STORAGE`, che controlla proprio que
 - **`true`**: App Service monta uno storage persistente (una share di Azure Storage, condivisa tra le istanze) su `/home`. I file sopravvivono ai restart. Il rovescio della medaglia è che il mount **fa ombra** a tutto quello che l'immagine ha in `/home`.
 - **`false`**: nessun mount. `/home` è il filesystem del container, quindi vale quello che c'è nell'immagine. Il filesystem però è effimero: quello che scrivi a runtime sparisce al restart.
 
+```mermaid
+flowchart TD
+    A["Immagine: /home/site/wwwroot contiene l'app"] --> B{"WEBSITES_ENABLE_APP_SERVICE_STORAGE"}
+    B -- "true" --> C["Share di Azure Storage montata su /home<br/>nasconde il wwwroot dell'immagine"]
+    C --> D["L'host carica 0 function"]
+    B -- "false" --> E["Nessun mount: vale il wwwroot dell'immagine"]
+    E --> F["L'host carica 5 function"]
+```
+
 Nel mio caso la setting **non era impostata** dopo il redeploy, e il log mostrava il mount persistente in azione. Che cosa faccia esattamente la piattaforma quando il valore manca può dipendere dal tipo di app e dalla piattaforma, quindi non do per scontato un default: l'unica cosa certa è che *non* impostarlo mi ha lasciato con un wwwroot coperto.
 
 ## La soluzione
@@ -67,9 +77,12 @@ Costo della scelta: `/home` non è più persistente. Per me va benissimo, perch�
 
 - ✅ L'host legge il `host.json` dell'immagine e carica le function: quello che c'è in ACR è quello che gira.
 - ✅ Comportamento prevedibile tra ambienti: niente file "fantasma" di uno storage persistente che si mette in mezzo.
-- ⚠️ **Le fix fatte a mano non sono fix.** Entrambe le correzioni (registry settings e questo flag) stavano solo sulla app. Il prossimo deploy che sovrascrive le app settings le cancella di nuovo. Vanno scritte nel modulo Bicep: il flag come `'false'`, e le credenziali del registry con `listCredentials()` o come parametri secure, mai la password in chiaro in un `.bicepparam`.
 - ⚠️ Dopo ogni deploy vale la pena controllare che le setting siano sopravvissute. Fidarsi è bene, `az functionapp config appsettings list` è meglio.
+
+> **Le fix fatte a mano non sono fix.** Entrambe le correzioni (registry settings e questo flag) stavano solo sulla app. Il prossimo deploy che sovrascrive le app settings le cancella di nuovo. Vanno scritte nel modulo Bicep: il flag come `'false'`, e le credenziali del registry con `listCredentials()` o come parametri secure, mai la password in chiaro in un `.bicepparam`.
+{: .prompt-warning }
 
 ## TL;DR
 
-Function su immagine ACR + `WEBSITES_ENABLE_APP_SERVICE_STORAGE` non a `false` = rischio che lo storage persistente su `/home` copra il tuo `wwwroot`, e l'host parte con **0 function**. Impostalo a `false` esplicitamente, **nel Bicep**, non solo a mano. Il te del prossimo redeploy ringrazia. ☕
+> Function su immagine ACR + `WEBSITES_ENABLE_APP_SERVICE_STORAGE` non a `false` = rischio che lo storage persistente su `/home` copra il tuo `wwwroot`, e l'host parte con **0 function**. Impostalo a `false` esplicitamente, **nel Bicep**, non solo a mano. Il te del prossimo redeploy ringrazia. ☕
+{: .prompt-tip }

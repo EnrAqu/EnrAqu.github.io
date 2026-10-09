@@ -6,22 +6,22 @@ theme: jekyll-theme-chirpy
 # The language of the webpage › http://www.lingoes.net/en/translator/langcode.htm
 # If it has the same name as one of the files in folder `_data/locales`, the layout language will also be changed,
 # otherwise, the layout language will use the default value of 'en'.
-lang: en
+lang: it-IT
 
 # Change to your timezone › https://zones.arilyn.cc
-timezone:
+timezone: Europe/Rome
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
 title: Enrico Aquilano
 
-tagline: Hey there! This is my little corner of the internet where I talk about Code and things that I love. You'll find Azure, DevOps, dotnet and more, and I hope you enjoy hanging out here as much as I enjoy writing it. Come on in!
+tagline: Ciao! Questo è il mio angolo di internet dove parlo di codice e delle cose che amo. Troverai Azure, DevOps, .NET e molto altro, e spero che ti piaccia passare di qui tanto quanto a me piace scriverci. Entra pure!
 
 description: >- # used by seo meta and the atom feed
-  A personal corner on the internet for developers! 
-  My shares thoughts and technical content on Azure, DevOps, and the .NET ecosystem. 
-  Stop by for guides, articles, and coding adventures.
+  Un angolo personale di internet per sviluppatori!
+  Pensieri e contenuti tecnici su Azure, DevOps e l'ecosistema .NET.
+  Passa a trovarmi per guide, articoli e avventure di codice.
 
 url: "https://EnrAqu.github.io"
 
@@ -29,15 +29,14 @@ github:
   username: EnrAqu 
 
 twitter:
-  username: twitter_username # change to your Twitter username
+  username:
 
 social:
   name: Enrico Aquilano
   email: enrico.aquilano@gmail.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/username # change to your Twitter homepage
-    - https://github.com/username # change to your GitHub homepage
+    - https://github.com/EnrAqu
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
@@ -96,7 +95,7 @@ theme_mode: # [light | dark]
 cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: https://media.licdn.com/dms/image/v2/D4D03AQHXDAaLmhpZ1A/profile-displayphoto-shrink_400_400/B4DZUke4IVGkAg-/0/1740073829462?e=1766016000&v=beta&t=1aXaMTEuhvuGE1V1v5zoySobzw4v48a9gMDe7T7gWt8
+avatar: https://github.com/EnrAqu.png
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
@@ -213,6 +212,7 @@ exclude:
   - purgecss.js
   - "*.config.js"
   - "package*.json"
+  - Z-Command.MD
 
 jekyll-archives:
   enabled: [categories, tags]
