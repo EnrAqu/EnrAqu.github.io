@@ -101,5 +101,6 @@ Per trovarne altri: le sessioni di Claude Code sono in `~/.claude/projects/` (fi
 | 2026-09-25 | Il redeploy che ti cancella le app settings | Bicep incrementale + `siteConfig.appSettings` = lista sostituita; fix con `union()` |
 | 2026-10-02 | Il database era lento ma i query plan erano perfetti | timeout -2 su Function + Azure SQL; il DB era innocente, colpa di payload e piano Consumption |
 | 2026-10-09 | WEBSITES_ENABLE_APP_SERVICE_STORAGE | Function su immagine ACR: il mount su `/home` copre `wwwroot`, 0 function caricate |
+| 2026-10-12 | Un Bicep per domarli tutti | metafora del Signore degli Anelli: un entry point con moduli vs un template per risorsa (pro/contro); caso reale: `appSettings` opzionale per singola Logic App, Key Vault reference, guard contro l'override delle settings di piattaforma |
 
 Aggiorna questa tabella a ogni nuovo post.
