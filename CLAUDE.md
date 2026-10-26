@@ -102,5 +102,6 @@ Per trovarne altri: le sessioni di Claude Code sono in `~/.claude/projects/` (fi
 | 2026-10-02 | Il database era lento ma i query plan erano perfetti | timeout -2 su Function + Azure SQL; il DB era innocente, colpa di payload e piano Consumption |
 | 2026-10-09 | WEBSITES_ENABLE_APP_SERVICE_STORAGE | Function su immagine ACR: il mount su `/home` copre `wwwroot`, 0 function caricate |
 | 2026-10-12 | Un Bicep per domarli tutti | metafora del Signore degli Anelli: un entry point con moduli vs un template per risorsa (pro/contro); caso reale: `appSettings` opzionale per singola Logic App, Key Vault reference, guard contro l'override delle settings di piattaforma |
+| 2026-10-26 | L'ordine degli addendi cambia il content share | `WEBSITE_CONTENTSHARE` calcolato dall'`index` del loop Bicep: app inserite in mezzo all'array spostano le altre su share vuoti (0 function); fix con `ContentShareIndex` fisso, tipo obbligatorio, check duplicati con `fail()`, what-if; buco negli alert |
 
 Aggiorna questa tabella a ogni nuovo post.
